@@ -21,10 +21,9 @@ ListNode* swapPairs(ListNode* head){
 	ListNode* cur = head;
 	while (cur != NULL && cur->next != NULL) {
 		///1->2->3->4->5->6
-		//cur = node1
-		ListNode* temp = cur->next;
-		cur->next = cur->next->next;
-		// 1->3->4->5->6
+		//cur = 1 , prev = 0
+		ListNode* temp = cur->next; // temp = 2
+		cur->next = cur->next->next; //1->3->4
 		temp->next = cur;
 		//2->1->3->4->5->6
 		prev->next = temp;
@@ -37,5 +36,26 @@ ListNode* swapPairs(ListNode* head){
 	return dummy.next;
 }
 
+void deleteNode(ListNode*& head) {
+	while (head != NULL) {
+		ListNode* temp = head;
+		head = head->next;
+		delete temp;
+	}
+}
+
+void printListNode(ListNode* head) {
+	while (head != NULL) {
+		cout << head->val << " ";
+		head = head->next;
+	}
+}
+
 int main() {
+	ListNode* l1 = new ListNode(1, new ListNode(2,new ListNode(3,new ListNode(4))));
+	printListNode(l1);
+	cout << endl;
+	l1 = swapPairs(l1);
+	printListNode(l1);
+	deleteNode(l1);
 }
